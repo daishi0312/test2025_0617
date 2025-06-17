@@ -1,0 +1,128 @@
+body {
+  font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #000;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+h1, h2 {
+  margin-bottom: 32px;
+  color: #fff;
+}
+button {
+  font-size: 1.2em;
+  padding: 12px 32px;
+  margin: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #888;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #555;
+}
+select {
+  font-size: 1em;
+  padding: 6px 16px;
+  margin: 8px 0 16px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #4caf50;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin: 32px 0;
+}
+.product-btn-group {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 24px;
+}
+.product-btn.round {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  font-size: 1.1em;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* すべてのボタンを横並び・丸型に */
+.screen > button,
+.screen > .button-group > button,
+.product-btn,
+.hotice-btn,
+#option-next-btn,
+#done-btn,
+#start-btn {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  font-size: 1.1em;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px;
+}
+
+/* 各画面のボタンを横並びにするグループ */
+.button-group,
+.product-btn-group {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* 1つしかボタンがない場合も中央寄せ */
+.screen > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ホット/アイス・オプション・完了画面のボタンも横並びに */
+#hotice-screen,
+#option-screen,
+#done-screen {
+  flex-direction: column;
+}
+#hotice-screen .button-group,
+#option-screen .button-group,
+#done-screen .button-group {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

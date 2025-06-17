@@ -1,19 +1,103 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    
-    <title>サンプルページ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自動販売機プロトタイプ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>ようこそ世界</h1>
-    </header>
-    <main>
-        <p>This is a sample HTML page. Feel free to customize it!</p>
-    </main>
-    <footer>
-        <p>&copy; 2025 My Website</p>
-    </footer>
+  <div id="app">
+    <!-- 開始画面 -->
+    <section class="screen" id="start-screen">
+      <h1>いらっしゃいませ</h1>
+      <button id="start-btn">開始する</button>
+    </section>
+
+    <!-- 商品選択画面 -->
+    <section class="screen hidden" id="product-screen">
+      <h2>商品を選択してください</h2>
+      <div class="product-btn-group">
+        <button class="product-btn" data-product="コーヒー">コーヒー</button>
+        <button class="product-btn" data-product="カフェラテ">カフェラテ</button>
+      </div>
+    </section>
+
+    <!-- ホット/アイス選択画面 -->
+    <section class="screen hidden" id="hotice-screen">
+      <h2>ホットまたはアイスを選択してください</h2>
+      <div class="button-group">
+        <button class="hotice-btn" data-type="ホット">ホット</button>
+        <button class="hotice-btn" data-type="アイス">アイス</button>
+      </div>
+    </section>
+
+    <!-- 濃さ・サイズ選択画面 -->
+    <section class="screen hidden" id="option-screen">
+      <h2>濃さとサイズを選択してください</h2>
+      <div>
+        <label>濃さ：</label>
+        <select id="strength-select">
+          <option value="うすめ">うすめ</option>
+          <option value="ふつう" selected>ふつう</option>
+          <option value="こいめ">こいめ</option>
+        </select>
+      </div>
+      <div>
+        <label>サイズ：</label>
+        <select id="size-select">
+          <option value="S">S</option>
+          <option value="M" selected>M</option>
+          <option value="L">L</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button id="option-next-btn">決定</button>
+      </div>
+    </section>
+
+    <!-- 抽出中画面 -->
+    <section class="screen hidden" id="brewing-screen">
+      <h2>抽出中です...</h2>
+      <div class="loader"></div>
+    </section>
+
+    <!-- 完了画面 -->
+    <section class="screen hidden" id="done-screen">
+      <h2>ご利用ありがとうございました！</h2>
+      <div class="button-group">
+        <button id="done-btn">最初に戻る</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    // 画面遷移制御
+    const screens = [
+      'start-screen',
+      'product-screen',
+      'hotice-screen',
+      'option-screen',
+      'brewing-screen',
+      'done-screen'
+    ];
+    function showScreen(id) {
+      screens.forEach(s => {
+        document.getElementById(s).classList.add('hidden');
+      });
+      document.getElementById(id).classList.remove('hidden');
+    }
+    document.getElementById('start-btn').onclick = () => showScreen('product-screen');
+    document.querySelectorAll('.product-btn').forEach(btn => {
+      btn.onclick = () => showScreen('hotice-screen');
+    });
+    document.querySelectorAll('.hotice-btn').forEach(btn => {
+      btn.onclick = () => showScreen('option-screen');
+    });
+    document.getElementById('option-next-btn').onclick = () => {
+      showScreen('brewing-screen');
+      setTimeout(() => showScreen('done-screen'), 2500);
+    };
+    document.getElementById('done-btn').onclick = () => showScreen('start-screen');
+  </script>
 </body>
 </html>
